@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "494484181872",
+    "project_id": "beematie-a0275",
+    "storage_bucket": "beematie-a0275.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494484181872:android:1dd10bb49b7a91b746b5b5",
+        "android_client_info": {
+          "package_name": "com.focman26.beetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494484181872-t2agq54bth0i3q6b1ng7lc9u7dfcee2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.focman26.beetest",
+            "certificate_hash": "1332451ae8f936c63fb5b81c232990aa5b03ee25"
+          }
+        },
+        {
+          "client_id": "494484181872-oikogs0pt41ntl4kohjtn7kd3g7ivjkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnZGLe_XouhlXSbbqfYfxvCZgn4H4wLGY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494484181872-oikogs0pt41ntl4kohjtn7kd3g7ivjkl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
