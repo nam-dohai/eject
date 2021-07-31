@@ -10,12 +10,15 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import firebase from '../../firebase/config';
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../../assets/styles';
 import isEmail from 'validator/lib/isEmail';
 import isStrongPassword from 'validator/lib/isStrongPassword';
 import isAlpha from 'validator/lib/isAlpha';
 import {userDataTemplate} from '../../constants'
+
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
+
 
 export default function SignupScreen({ navigation }) {
   const [name, setName] = useState('');
@@ -33,12 +36,11 @@ export default function SignupScreen({ navigation }) {
       return
     }
     setLoading(true);
-    firebase
-      .auth()
+    auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         const uid = response.user.uid;
-        const userRef = firebase.firestore().collection('users');
+        const userRef = firestore().collection('users');
         const data = {
           ...userDataTemplate,
           id: response.user.uid,

@@ -5,8 +5,9 @@ import Icon from '../../components/Icon';
 import successfullIcon from '../../assets/successfull-icon.png';
 import { updateUserData } from '../../redux/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import firebase from '../../firebase/config';
 import Button from '../../components/Button';
+
+import firestore from '@react-native-firebase/firestore'
 
 export default function SubmitScreen() {
   const userData = useSelector((state) => state.user.data);
@@ -23,7 +24,7 @@ export default function SubmitScreen() {
         }}
         title="Tìm Matie"
         onPress={() => {
-          const usersRef = firebase.firestore().collection('users');
+          const usersRef = firestore().collection('users');
           usersRef
             .doc(userData.id)
             .update({

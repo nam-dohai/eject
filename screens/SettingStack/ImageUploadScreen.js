@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
-import firebase from '../../firebase/config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from '../../redux/userSlice';
 import styles from './styles';
@@ -18,6 +17,7 @@ import { PRIMARY_COLOR } from '../../assets/styles';
 import Icon from '../../components/Icon';
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '../../components/Button';
+import storage from '@react-native-firebase/storage';
 
 export default function ImageUploadScreen({ navigation }) {
   const [image, setImage] = useState(null);
@@ -57,7 +57,6 @@ export default function ImageUploadScreen({ navigation }) {
 
   const submit = async () => {
     setUploadingData(true);
-    const usersRef = firebase.firestore().collection('users');
     const downloadURL = await uploadImageAsync(image);
     dispatch(
       setUserData({
@@ -85,14 +84,13 @@ export default function ImageUploadScreen({ navigation }) {
       xhr.open('GET', uri, true);
       xhr.send(null);
     });
-
-    const ref = firebase.storage().ref().child(`images/${userData.id}.jpeg`);
+    const ref = storage().ref(`images/${userData.id}.jpeg`);
     const snapshot = await ref.put(blob);
 
     // We're done with the blob, close and release it
     blob.close();
-
-    const downloadURL = await snapshot.ref.getDownloadURL();
+    const downloadURL = await ref.getDownloadURL();
+    
     return downloadURL;
   };
   return (

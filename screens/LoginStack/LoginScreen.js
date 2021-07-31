@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import firebase from '../../firebase/config';
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../../assets/styles';
 import Icon from '../../components/Icon';
+
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
 
 const Divider = ({ title }) => (
   <View
@@ -64,13 +66,12 @@ export default function LoginScreen({ navigation }) {
         permissions: ['public_profile'],
       });
       if (type === 'success') {
-        const credential = firebase.auth.FacebookAuthProvider.credential(token);
-        firebase
-          .auth()
+        const credential = auth.FacebookAuthProvider.credential(token);
+        auth()
           .signInWithCredential(credential)
           .then((response) => {
             const uid = response.user.uid;
-            const userRef = firebase.firestore().collection('users');
+            const userRef = firestore().collection('users');
             userRef
               .doc(uid)
               .get()
@@ -114,12 +115,11 @@ export default function LoginScreen({ navigation }) {
 
   const onLoginPress = async () => {
     setLogging(true);
-    firebase
-      .auth()
+    auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         const uid = response.user.uid;
-        const userRef = firebase.firestore().collection('users');
+        const userRef = firestore().collection('users');
         userRef
           .doc(uid)
           .get()

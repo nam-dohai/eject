@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:494484181872:android:1dd10bb49b7a91b746b5b5",
+        "mobilesdk_app_id": "1:494484181872:android:d5e531742c23bfbe46b5b5",
         "android_client_info": {
-          "package_name": "com.focman26.beetest"
+          "package_name": "com.nguyenhaiduc06.eject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "494484181872-t2agq54bth0i3q6b1ng7lc9u7dfcee2h.apps.googleusercontent.com",
+          "client_id": "494484181872-l02viellcr5ka6ljn986dcb92gemfdqi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.focman26.beetest",
-            "certificate_hash": "1332451ae8f936c63fb5b81c232990aa5b03ee25"
+            "package_name": "com.nguyenhaiduc06.eject",
+            "certificate_hash": "fb81ea897e75fccbff3530c3628a75d4cd149216"
           }
         },
         {

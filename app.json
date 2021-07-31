@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "beetest",
     "name": "eject",
     "slug": "eject",
     "version": "1.0.0",
@@ -21,6 +22,7 @@
       "bundleIdentifier": "com.nguyenhaiduc06.eject"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

@@ -11,15 +11,16 @@ import {
 import { ActivityIndicator } from 'react-native-paper';
 import { PRIMARY_COLOR, DARK_GRAY } from '../../assets/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import firebase from '../../firebase/config';
 import CardItem from '../../components/CardItem';
 import { useEffect, useState } from 'react';
 import emptyMatie from '../../assets/empty-matie.png';
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
 
 export default function MatchScreen({ navigation }) {
   const userData = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
-  const usersRef = firebase.firestore().collection('users');
+  const usersRef = firestore().collection('users');
   const [matieDatas, setMatieDatas] = useState([]);
   const [matieDatasLoaded, setMatieDatasLoaded] = useState(false);
   const [refreshing, setRefreshing] = useState(false);

@@ -15,7 +15,9 @@ import Button from '../../components/Button';
 import { getDistance } from '../../api/goong';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMatchData } from '../../redux/matchSlice';
-import firebase from '../../firebase/config'
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
+
 
 export default function MatchProfileScreen({ route, navigation }) {
   const userData = useSelector((state) => state.user.data);
@@ -24,8 +26,8 @@ export default function MatchProfileScreen({ route, navigation }) {
   const matchData = useSelector((state) => state.match.data);
   const dispatch = useDispatch();
   const [commitment,setCommitment] = useState(null);
-  const usersRef = firebase.firestore().collection('users');
-  const matchesRef = firebase.firestore().collection('matches');
+  const usersRef = firestore().collection('users');
+  const matchesRef = firestore().collection('matches');
   const [matieData,setMatieData] = useState(null);
   const [loading, setLoading] = useState(true);
 

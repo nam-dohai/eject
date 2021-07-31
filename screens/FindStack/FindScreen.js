@@ -4,7 +4,6 @@ import { ActivityIndicator } from 'react-native-paper';
 import { PRIMARY_COLOR, DARK_GRAY } from '../../assets/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData, updateUserData } from '../../redux/userSlice';
-import firebase from '../../firebase/config';
 import FindMatieCardItem from '../../components/FindMatieCardItem';
 import { matchDataTemplate } from '../../constants';
 import Swiper from 'react-native-deck-swiper';
@@ -14,6 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import matiesImage from '../../assets/maties.png';
 
 import * as Notifications from 'expo-notifications';
+
+import firestore from '@react-native-firebase/firestore'
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -28,8 +29,8 @@ export default function FindScreen({ navigation }) {
   const dispatch = useDispatch();
   const [maties, setMaties] = useState([]);
   const [matiesLoaded, setMatiesLoaded] = useState(false);
-  const usersRef = firebase.firestore().collection('users');
-  const matchesRef = firebase.firestore().collection('matches');
+  const usersRef = firestore().collection('users');
+  const matchesRef = firestore().collection('matches');
   const [creationTimeOfLastBrowsedMatie, setCreationTimeOfLastBrowsedMatie] = useState(userData.creationTimeOfLastBrowsedMatie);
 
   const insets = useSafeAreaInsets();

@@ -11,6 +11,8 @@ import { WHITE, GRAY, DARK_GRAY, BORDER, HEADING, SUB_HEADING, PARAGRAPH } from 
 import Button from '../../components/Button';
 import firebase from '../../firebase/config';
 import { useSelector, useDispatch } from 'react-redux';
+import auth from '@react-native-firebase/auth'
+
 export default function PinCodeScreen({ route, navigation }) {
   const userData = useSelector((state) => state.user.data);
   const usersRef = firebase.firestore().collection('users');
@@ -39,12 +41,11 @@ export default function PinCodeScreen({ route, navigation }) {
   const onLogIn = async () => {
     setLogging(true);
     try {
-      const credential = firebase.auth.PhoneAuthProvider.credential(
+      const credential = auth.PhoneAuthProvider.credential(
         verificationId,
         verificationCode
       );
-      firebase
-        .auth()
+      auth()
         .signInWithCredential(credential)
         .catch((error) => {
           setLogging(false);

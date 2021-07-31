@@ -6,19 +6,19 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-import firebase from '../../firebase/config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from '../../redux/userSlice';
 import Icon from '../../components/Icon';
 import { WHITE, GRAY, DARK_GRAY, BLACK, HEADING, SUB_HEADING, PARAGRAPH } from '../../assets/styles';
 import Button from '../../components/Button';
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
 
 export default function ProfileScreen({ navigation }) {
   const userData = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
   const signOut = () => {
-    firebase
-      .firestore()
+    firestore()
       .collection('users')
       .doc(userData.id)
       .get()
@@ -26,14 +26,12 @@ export default function ProfileScreen({ navigation }) {
         const newTokenList = doc
           .data()
           .tokenList.filter((token) => token != userData.token);
-        firebase
-          .firestore()
+        firestore()
           .collection('users')
           .doc(userData.id)
           .update({ tokenList: newTokenList })
           .then(() => {
-            firebase
-              .auth()
+            auth()
               .signOut()
               .catch((error) => alert(error));
           });

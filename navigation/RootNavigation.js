@@ -7,26 +7,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import firebase from '../firebase/config';
-import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-import { Platform } from 'react-native';
 import {userDataTemplate} from '../constants/index'
 import * as Linking from 'expo-linking'
-import * as TaskManager from 'expo-task-manager';
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
 
 export default function RootNavigation() {
   const userData = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
-  const [auth, setAuth] = useState(false);
+  const [isAuth, setAuth] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [expoPushToken, setExpoPushToken] = useState('');
 
-  const usersRef = firebase.firestore().collection('users');
+  const usersRef = firestore().collection('users');
 
   useEffect(() => {
     const logIn = () => {
-      firebase.auth().onAuthStateChanged((response) => {
+      auth().onAuthStateChanged((response) => {
+        console.log(response);
         if (response) {
           registerForPushNotificationsAsync().then((token) => {     
             usersRef
@@ -138,7 +136,7 @@ export default function RootNavigation() {
             }
           }}
         >
-          {auth ? (
+          {isAuth ? (
             userData.firstLogin ? (
               <SettingStack />
             ) : (

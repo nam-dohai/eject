@@ -9,14 +9,15 @@ import {
 import { PRIMARY_COLOR, BLACK, DARK_GRAY, GRAY } from '../../assets/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMatchData } from '../../redux/matchSlice';
-import firebase from '../../firebase/config';
 import Button from '../../components/Button';
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
 
 export default function PaymentScreen({ route, navigation }) {
   const userData = useSelector((state) => state.user.data);
   const matchData = useSelector((state) => state.match.data);
   const dispatch = useDispatch();
-  const matchRef = firebase.firestore().collection('matches');
+  const matchRef = firestore().collection('matches');
   const { pack } = route.params;
 
   const confirmPayment = (pack) => {

@@ -4,7 +4,9 @@ import { DataTable } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMatchData } from '../../redux/matchSlice';
 import { PRIMARY_COLOR } from '../../assets/styles';
-import firebase from '../../firebase/config'
+
+import firestore from '@react-native-firebase/firestore'
+import auth from '@react-native-firebase/auth'
 
 export default function CommitmentScreen({route, navigation }) {  
   const {matchId} = route.params;
@@ -12,7 +14,7 @@ export default function CommitmentScreen({route, navigation }) {
   const matchData = useSelector((state) => state.match.data);
   const dispatch = useDispatch();
   const [commitment,setCommitment] = useState(null);
-  const matchesRef = firebase.firestore().collection('matches');
+  const matchesRef = firestore().collection('matches');
 
   useEffect(()=>{
     const getCommitmentFromDb = () => {
